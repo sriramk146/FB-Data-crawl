@@ -4,30 +4,11 @@ import datetime
 import csv
 import time
 
-
-
-
-
-
-"""
-INPUTS:
-    text: a string
-OUTPUTS: 
-    a better formatted string
-"""
 def unicode_normalize(text):
     return text.translate({ 0x2018:0x27, 0x2019:0x27, 0x201C:0x22, 0x201D:0x22,
                             0xa0:0x20 }).encode('utf-8')
 
 
-
-
-"""
-INPUTS:
-    url: a request url
-OUTPUTS: 
-    the data returned by calling that url
-"""
 def request_data_from_url(url):
     req = urllib.Request(url)
     success = False
@@ -50,13 +31,6 @@ def request_data_from_url(url):
     #return the contents of the response
     return response.read()
 
-"""
-INPUTS: 
-    post: information about a single post on the facebook page
-    access_token: authentication proving that you have a valid facebook account
-OUTPUTS: 
-    a list with the requested fields for this post
-"""
 def process_post(post, access_token):
 
     post_id = post['id']
@@ -83,14 +57,6 @@ def process_post(post, access_token):
     return (post_id, post_message, post_type,
             post_published, num_reactions, num_comments, num_shares)
 
-
-"""
-INPUTS:
-    page_id: the unique id for the facebook page you are trying to scrape
-    access_token: authentication proving that you have a valid facebook account
-OUTPUTS:
-    nothing, simply prints how many posts were processed and how long it took
-"""
 def scrape_facebook_page(page_id, access_token):
     #open up a csv (comma separated values) file to write data to
     with open('%s_facebook_posts.csv' % page_id, 'wb') as file:
@@ -135,10 +101,6 @@ def scrape_facebook_page(page_id, access_token):
 
         print ("Completed!\n%s posts Processed in %s") % \
                 (num_processed, datetime.datetime.now() - scrape_starttime)
-
-
-
-
 
 
 
